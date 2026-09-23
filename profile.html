@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Profile — TaskBoard{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Your profile</h1>
+    <p class="page-sub">Account details and a quick summary of your activity.</p>
+  </div>
+</div>
+
+<div class="profile-card">
+  <div class="profile-avatar">{{ user.name[0]|upper }}</div>
+  <div class="profile-info">
+    <h2>{{ user.name }}</h2>
+    <p>{{ user.email }}</p>
+    <p class="profile-since">Member since {{ user.created_date }}</p>
+  </div>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <span class="stat-label">Total tasks</span>
+    <span class="stat-value">{{ stats.total }}</span>
+  </div>
+  <div class="stat-card stat-pending">
+    <span class="stat-label">Pending</span>
+    <span class="stat-value">{{ stats.pending }}</span>
+  </div>
+  <div class="stat-card stat-done">
+    <span class="stat-label">Completed</span>
+    <span class="stat-value">{{ stats.completed }}</span>
+  </div>
+  <div class="stat-card stat-overdue">
+    <span class="stat-label">Overdue</span>
+    <span class="stat-value">{{ stats.overdue }}</span>
+  </div>
+</div>
+{% endblock %}
