@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — TaskBoard{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>Welcome, {{ user.name.split(' ')[0] }} 👋</h1>
+    <p class="page-sub">Here's where things stand with your assignments.</p>
+  </div>
+  <a href="{{ url_for('add_task_page') }}" class="btn btn-primary">+ Add task</a>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <span class="stat-label">Total tasks</span>
+    <span class="stat-value">{{ stats.total }}</span>
+  </div>
+  <div class="stat-card stat-pending">
+    <span class="stat-label">Pending</span>
+    <span class="stat-value">{{ stats.pending }}</span>
+  </div>
+  <div class="stat-card stat-done">
+    <span class="stat-label">Completed</span>
+    <span class="stat-value">{{ stats.completed }}</span>
+  </div>
+  <div class="stat-card stat-overdue">
+    <span class="stat-label">Overdue</span>
+    <span class="stat-value">{{ stats.overdue }}</span>
+  </div>
+</div>
+
+<div class="progress-block">
+  <div class="progress-head">
+    <span>Overall progress</span>
+    <span>{{ stats.completed }} / {{ stats.total }} completed</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" style="width: {{ stats.percent }}%;"></div>
+  </div>
+</div>
+
+<div class="section-head">
+  <h2>Recent assignments</h2>
+  <a href="{{ url_for('tasks_page') }}" class="link-more">View all →</a>
+</div>
+
+{% if recent_tasks %}
+<div class="task-table">
+  <div class="task-table-row task-table-head">
+    <span>Title</span>
+    <span>Subject</span>
+    <span>Due date</span>
+    <span>Priority</span>
+    <span>Status</span>
+  </div>
+  {% for task in recent_tasks %}
+  <div class="task-table-row">
+    <span class="cell-title">{{ task.title }}</span>
+    <span>{{ task.subject }}</span>
+    <span class="{% if task.is_overdue %}text-overdue{% endif %}">
+      {{ task.due_date or '—' }}{% if task.is_overdue %} (overdue){% endif %}
+    </span>
+    <span><span class="pill pill-{{ task.priority|lower }}">{{ task.priority }}</span></span>
+    <span><span class="pill pill-status-{{ task.status|lower }}">{{ task.status }}</span></span>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+  <p>You don't have any assignments yet.</p>
+  <a href="{{ url_for('add_task_page') }}" class="btn btn-primary">Add your first task</a>
+</div>
+{% endif %}
+{% endblock %}
