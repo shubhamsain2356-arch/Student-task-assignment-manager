@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Log in — TaskBoard{% endblock %}
+{% block bodyclass %}public{% endblock %}
+
+{% block public_content %}
+<div class="auth-page">
+  <div class="auth-card">
+    <a href="{{ url_for('index') }}" class="brand auth-brand">
+      <span class="brand-mark">S</span>
+      <span class="brand-name">TaskBoard</span>
+    </a>
+    <h1>Welcome back</h1>
+    <p class="auth-sub">Log in to see your tasks.</p>
+
+    <form method="POST" action="{{ url_for('login') }}" class="auth-form">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Your password" required>
+
+      <button type="submit" class="btn btn-primary btn-block">Log in</button>
+    </form>
+
+    <p class="auth-switch">New here? <a href="{{ url_for('signup') }}">Create an account</a></p>
+  </div>
+</div>
+{% endblock %}
