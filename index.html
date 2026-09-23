@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}TaskBoard — Student Task & Assignment Manager{% endblock %}
+{% block bodyclass %}public{% endblock %}
+
+{% block public_content %}
+<header class="public-nav">
+  <div class="public-nav-inner">
+    <div class="brand">
+      <span class="brand-mark">S</span>
+      <span class="brand-name">TaskBoard</span>
+    </div>
+    <div class="public-nav-links">
+      <a href="{{ url_for('login') }}" class="btn btn-ghost">Log in</a>
+      <a href="{{ url_for('signup') }}" class="btn btn-primary">Sign up</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">Built for coursework, not chaos</p>
+      <h1>Keep every assignment where you can actually find it.</h1>
+      <p class="hero-sub">
+        TaskBoard is a simple dashboard for tracking subjects, due dates and priorities —
+        so nothing slips through the cracks between lectures, labs and deadlines.
+      </p>
+      <div class="hero-actions">
+        <a href="{{ url_for('signup') }}" class="btn btn-primary btn-lg">Create your account</a>
+        <a href="{{ url_for('login') }}" class="btn btn-outline btn-lg">I already have one</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="mock-card mock-card-1">
+        <div class="mock-row"><span class="mock-dot mock-dot-high"></span> Data Structures Assignment</div>
+        <div class="mock-meta">Due 12 Oct · High priority</div>
+      </div>
+      <div class="mock-card mock-card-2">
+        <div class="mock-row"><span class="mock-dot mock-dot-med"></span> DBMS Lab Report</div>
+        <div class="mock-meta">Due 15 Oct · Medium priority</div>
+      </div>
+      <div class="mock-card mock-card-3">
+        <div class="mock-row"><span class="mock-dot mock-dot-done"></span> AI Quiz Prep</div>
+        <div class="mock-meta">Completed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="features-inner">
+    <div class="feature">
+      <h3>One place for every subject</h3>
+      <p>Add assignments with subject, due date and priority, then filter and sort them in seconds.</p>
+    </div>
+    <div class="feature">
+      <h3>See what's overdue at a glance</h3>
+      <p>The dashboard totals your pending, completed and overdue work so you know where to start.</p>
+    </div>
+    <div class="feature">
+      <h3>Private to you</h3>
+      <p>Your login keeps your task list separate from every other student using the app.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="public-footer">
+  <p>Student Task & Assignment Manager — a portfolio project built with Flask.</p>
+</footer>
+{% endblock %}
