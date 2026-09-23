@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Student Task Manager{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="{% block bodyclass %}{% endblock %}">
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-wrap">
+      {% for message in messages %}
+        <div class="flash-msg">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+{% if user %}
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-mark">S</span>
+      <span class="brand-name">TaskBoard</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="{{ url_for('dashboard') }}" class="{% if active == 'dashboard' %}active{% endif %}">Dashboard</a>
+      <a href="{{ url_for('tasks_page') }}" class="{% if active == 'tasks' %}active{% endif %}">My Tasks</a>
+      <a href="{{ url_for('add_task_page') }}" class="{% if active == 'add' %}active{% endif %}">Add Task</a>
+      <a href="{{ url_for('profile') }}" class="{% if active == 'profile' %}active{% endif %}">Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="mini-avatar">{{ user.name[0]|upper }}</div>
+      <div class="mini-user">
+        <span class="mini-name">{{ user.name }}</span>
+        <a href="{{ url_for('logout') }}" class="mini-logout">Log out</a>
+      </div>
+    </div>
+  </aside>
+  <main class="app-main">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+{% else %}
+  {% block public_content %}{% endblock %}
+{% endif %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
