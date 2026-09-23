@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}My Tasks — TaskBoard{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>My tasks</h1>
+    <p class="page-sub">Search, filter and manage every assignment in one place.</p>
+  </div>
+  <a href="{{ url_for('add_task_page') }}" class="btn btn-primary">+ Add task</a>
+</div>
+
+<div class="toolbar">
+  <input type="text" id="search-input" class="toolbar-search" placeholder="Search by title...">
+
+  <select id="filter-subject" class="toolbar-select">
+    <option value="">All subjects</option>
+  </select>
+
+  <select id="filter-status" class="toolbar-select">
+    <option value="">All statuses</option>
+    <option value="Pending">Pending</option>
+    <option value="Completed">Completed</option>
+  </select>
+
+  <select id="filter-priority" class="toolbar-select">
+    <option value="">All priorities</option>
+    <option value="High">High</option>
+    <option value="Medium">Medium</option>
+    <option value="Low">Low</option>
+  </select>
+
+  <select id="sort-due" class="toolbar-select">
+    <option value="">Sort by due date</option>
+    <option value="asc">Due date: soonest first</option>
+    <option value="desc">Due date: latest first</option>
+  </select>
+</div>
+
+<div id="task-list" class="task-cards">
+  <p class="loading-msg">Loading tasks...</p>
+</div>
+
+<div id="empty-state" class="empty-state" style="display:none;">
+  <p>No tasks match your filters.</p>
+</div>
+
+<!-- Delete confirmation dialog -->
+<div id="confirm-overlay" class="confirm-overlay" style="display:none;">
+  <div class="confirm-box">
+    <h3>Delete this task?</h3>
+    <p>This action can't be undone.</p>
+    <div class="confirm-actions">
+      <button id="confirm-cancel" class="btn btn-ghost">Cancel</button>
+      <button id="confirm-delete" class="btn btn-danger">Delete</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", initTasksPage);
+</script>
+{% endblock %}
